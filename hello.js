@@ -44,39 +44,50 @@ function playRoud(playerSelection, computerSelection) {
         else {
             return "You Win! Scissors beats the Paper";
         }
+    return 0;
     }
+    
 
 }
 
-function game() {
-    let count = 0;
-    let compuCount =0;
-    for (let i = 0; i<5; i++) {
-        const playerSelection = prompt("What's your choice?");
-        const computerSelection = getComputerChoice();
-        let result = playRoud(playerSelection,computerSelection);
-        
-        if(result.includes("Win!")) {
-            console.log("You won for this round")
-            count++;
-        }
-        else if (result.includes("Tie!")){
-            console.log("It's a Tie");
-        }
-        else {
-            console.log("You lost for this round")
-            compuCount++;
-        }
-    }
-    if (count > compuCount) {
-        console.log("You Win!");
-    }
-    else if (count == compuCount) {
-        console.log("It's a Tie!");
-    }
-    else {
-        console.log("You Lose!");
-    }
-}
 
-game();
+function nee()  {
+    const temp = getComputerChoice();
+    const but = this.id;
+    const res = playRoud(but,temp);
+    if(res.includes("Win!")) {
+        count++;
+        div.textContent = `Your score = ${count}, Computer Score = ${compuCount}`;
+    }
+    else if(res.includes("Lose!")) {
+        compuCount++;
+        div.textContent = `Your score = ${count}, Computer Score = ${compuCount}`;
+    }
+    else{
+        div.textContent = "It's a Tie Game. Play Again!"
+    }
+    if(count==5|| compuCount==5) {
+        if(count ==5) {
+            div.innerText = "Game Over! You Won."
+        }
+        else{
+            div.innerText = "Game Over! You Lost."
+        }
+       
+        count = 0;
+        compuCount = 0;
+       
+    }
+    
+
+}
+let count =0;
+let compuCount=0;
+const div = document.createElement('div');
+div.classList.add('result');
+const body = document.querySelector('body');
+body.append(div);
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', nee);
+})
